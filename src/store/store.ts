@@ -9,7 +9,7 @@ export const nameState = atom<NameState>({
   default: null,
 });
 
-export const scoreState = atom<String | null>({
+export const scoreState = atom<string | null>({
   key: 'scoreState',
   default: null,
 });
@@ -17,6 +17,11 @@ export const scoreState = atom<String | null>({
 export const textState = atom<TextState>({
   key: 'textState',
   default: '',
+});
+
+export const numScoreState = atom<number>({
+  key: 'numScoreState',
+  default: 0,
 });
 
 // export const resultState = atom<number | null>({

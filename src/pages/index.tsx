@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { nameState } from '../store/store';
-
+import Image from 'next/image';
 type LoginResponse = boolean;
 
 export default function Index() {
@@ -33,7 +33,7 @@ export default function Index() {
       });
   };
 
-  const onclickRank = () => {
+  const onClickRank = () => {
     router.push({
       pathname: '/Ranking',
     });
@@ -42,14 +42,23 @@ export default function Index() {
   return (
     <Container>
       <StyledBox onSubmit={onSubmit}>
+        <StyledH1>
+          신학기가 시작되자 긍정 에너지가 필요한 <br /> 토끼는 긍정적이 삶을 위한 여정을 떠난다.
+        </StyledH1>
         <Nickname>
-          이름
+          <StyledH2>네 이름을 입력하렴 &#40;&#94;&#94;&#41;7</StyledH2>
           <StyledInput type='text' onChange={onChangeName} value={name} />
         </Nickname>
+        <ImgBox>
+          <Image src='/rabbit.png' alt='토끼' width={400} height={400} />
+        </ImgBox>
         <ButtonDiv>
-          {' '}
-          <Button type='submit'>시작</Button>
-          <Button onClick={onclickRank}>랭킹</Button>
+          <Button type='submit' disabled={name.length !== 3}>
+            시작
+          </Button>
+          <Button type='button' onClick={onClickRank}>
+            랭킹
+          </Button>
         </ButtonDiv>
       </StyledBox>
     </Container>
@@ -63,20 +72,41 @@ const Container = styled.div`
 `;
 
 const StyledBox = styled.form`
-  margin-top: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const StyledH1 = styled.h1`
+  text-align: center;
+
+  font-size: 2rem;
 `;
 
 const Nickname = styled.div`
+  margin-top: 3vh;
+
+  font-size: 2rem;
+`;
+
+const StyledH2 = styled.div`
+  margin-bottom: 1vh;
+`;
+
+const ImgBox = styled.div`
   width: 400px;
-  font-size: 3rem;
-  color: #f7adb9;
+  height: 400px;
+
+  overflow: hidden;
 `;
 
 const StyledInput = styled.input`
-  width: 15vw;
-  height: 60px;
+  width: 20vw;
+  height: 50px;
+  font-size: 30px;
 
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
   margin-left: 2vw;
 `;
 
@@ -90,7 +120,6 @@ const Button = styled.button`
   width: 10vw;
   height: 64px;
 
-  padding-top: 16px;
   margin-right: 1vw;
   margin-left: 1vw;
 
@@ -98,8 +127,13 @@ const Button = styled.button`
   text-align: center;
 
   border-radius: 5px;
+  border-color: #f7adb9;
   background-color: #f7adb9;
   color: white;
 
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+  }
 `;
